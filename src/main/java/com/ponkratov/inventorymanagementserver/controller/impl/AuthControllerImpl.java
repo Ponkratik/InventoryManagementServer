@@ -50,12 +50,6 @@ public class AuthControllerImpl implements AuthController {
                 .map(GrantedAuthority::getAuthority).toList();
 
         Role role = roleRepository.findByRoleName(rolesStr.get(0)).get();
-        /*List<Role> roles = new ArrayList<>();
-        for (String s : rolesStr) {
-            Role r = new Role();
-            r = roleRepository.findByRoleName(s).get();
-            roles.add(r);
-        }*/
 
         return new ResponseEntity<>(new JwtResponse(jwt,
                 userDetails.getUsername(),
@@ -72,7 +66,7 @@ public class AuthControllerImpl implements AuthController {
 
         Responsible responsible = new Responsible();
         responsible.setUsername(signupRequest.getUsername());
-        responsible.setPassword(signupRequest.getPassword());
+        responsible.setPassword(passwordEncoder.encode(signupRequest.getPassword()));
         responsible.setFio(signupRequest.getFio());
         responsible.setRoleByRoleId(signupRequest.getRoleByRoleId());
         responsible.setRegionByRegionId(signupRequest.getRegionByRegionId());
