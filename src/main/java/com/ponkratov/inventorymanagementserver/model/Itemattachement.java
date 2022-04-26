@@ -1,10 +1,19 @@
 package com.ponkratov.inventorymanagementserver.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Itemattachement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -18,6 +27,7 @@ public class Itemattachement {
     private String fileType;
     @Basic
     @Column(name = "data")
+    @Lob
     private byte[] data;
     @ManyToOne
     @JoinColumn(name = "itemId", referencedColumnName = "itemId")
